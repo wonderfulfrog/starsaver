@@ -33,6 +33,7 @@ function update() {
     }
 
     addNewStars();
+    cleanStars();
 
 }
 
@@ -74,4 +75,8 @@ function addNewStars() {
         star.color = color;
         stars.push(star);
     }
+}
+
+function cleanStars() {
+
 }
