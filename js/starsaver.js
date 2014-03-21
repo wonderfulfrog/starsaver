@@ -29,6 +29,7 @@ function update() {
         var deltaY = (ty / dist) * star.speed;
         star.curr.x = star.curr.x - deltaX;
         star.curr.y = star.curr.y - deltaY;
+        star.speed = star.speed + 0.7;
     }
 
     addNewStars();
@@ -46,16 +47,16 @@ function render() {
 }
 
 function addNewStars() {
-    for(var i = 0; i < 100; i++) {
-        var devX = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
-        var devY = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
+    for(var i = 0; i < 1; i++) {
+        var devX = ((Math.random()*50)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
+        var devY = ((Math.random()*50)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
         var x = originX + devX;
         var y = originY + devY;
         var star = {
             origin: { x: originX, y: originY },
             curr: { x: x, y: y },
             size: 2,
-            speed: 5,
+            speed: 7,
             slope: (x - originX) / (y - originY)
         }
         stars.push(star);
