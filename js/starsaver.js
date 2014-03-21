@@ -29,10 +29,11 @@ function update() {
         var deltaY = (ty / dist) * star.speed;
         star.curr.x = star.curr.x - deltaX;
         star.curr.y = star.curr.y - deltaY;
-        star.speed = star.speed + 0.6;
+        star.speed = star.speed + Math.random();
     }
 
     addNewStars();
+    cleanStars();
 
 }
 
@@ -40,7 +41,7 @@ function render() {
 
     for(var i = 0; i < stars.length; i++) {
         var star = stars[i];
-        game.context.fillStyle = 'rgba(255, 255, 255, 1.0)';
+        game.context.fillStyle = 'rgba('+ star.color.red + ', ' + star.color.green + ', ' + star.color.blue + ', ' + star.brightness + ')';
         game.context.fillRect(star.curr.x, star.curr.y, star.size, star.size);
     }
 
@@ -57,8 +58,25 @@ function addNewStars() {
             curr: { x: x, y: y },
             size: 2,
             speed: 1.2,
-            slope: (x - originX) / (y - originY)
+            slope: (x - originX) / (y - originY),
+            brightness: Math.random(),
+            color: {}
         }
+        var rand = (Math.random()*10)+1;
+        if(rand > 9.5)
+            color = { 'red': 255, 'green': 170, 'blue': 170 };
+        else if(rand > 9)
+            color = { 'red': 170, 'green': 170, 'blue': 255 };
+        else if(rand > 8.7)
+            color = { 'red': 255, 'green': 255, 'blue': 153 };
+        else
+            color = { 'red': 255, 'green': 255, 'blue': 255 };
+
+        star.color = color;
         stars.push(star);
     }
+}
+
+function cleanStars() {
+
 }
