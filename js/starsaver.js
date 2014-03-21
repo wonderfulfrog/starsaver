@@ -29,7 +29,7 @@ function update() {
         var deltaY = (ty / dist) * star.speed;
         star.curr.x = star.curr.x - deltaX;
         star.curr.y = star.curr.y - deltaY;
-        star.speed = star.speed + 0.7;
+        star.speed = star.speed + 0.6;
     }
 
     addNewStars();
@@ -56,7 +56,7 @@ function addNewStars() {
             origin: { x: originX, y: originY },
             curr: { x: x, y: y },
             size: 2,
-            speed: 7,
+            speed: 1.2,
             slope: (x - originX) / (y - originY)
         }
         stars.push(star);
