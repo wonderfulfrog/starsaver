@@ -12,20 +12,7 @@ function create() {
 
     stars = [];
 
-    for(var i = 0; i < 100; i++) {
-        var devX = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
-        var devY = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
-        var x = originX + devX;
-        var y = originY + devY;
-        var star = {
-            origin: { x: originX, y: originY },
-            curr: { x: x, y: y },
-            size: 2,
-            speed: 5,
-            slope: (x - originX) / (y - originY)
-        }
-        stars.push(star);
-    }
+    addNewStars();
 
 }
 
@@ -44,6 +31,8 @@ function update() {
         star.curr.y = star.curr.y - deltaY;
     }
 
+    addNewStars();
+
 }
 
 function render() {
@@ -54,4 +43,21 @@ function render() {
         game.context.fillRect(star.curr.x, star.curr.y, star.size, star.size);
     }
 
+}
+
+function addNewStars() {
+    for(var i = 0; i < 100; i++) {
+        var devX = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
+        var devY = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
+        var x = originX + devX;
+        var y = originY + devY;
+        var star = {
+            origin: { x: originX, y: originY },
+            curr: { x: x, y: y },
+            size: 2,
+            speed: 5,
+            slope: (x - originX) / (y - originY)
+        }
+        stars.push(star);
+    }
 }
