@@ -1,6 +1,9 @@
 var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight;
 
+var originX = WIDTH / 2;
+var originY = HEIGHT / 2;
+
 var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.CANVAS, 'starsaver', {create: create, update: update, render: render });
 
 var stars;
@@ -9,27 +12,38 @@ function create() {
 
     stars = [];
 
-    var star = {
-        origin: { x: 0, y: 0 },
-        start: { x: 100, y: 150 },
-        curr: { x: 100, y: 150 },
-        size: 2,
-        speed: 0.2,
-        slope: (100 - 0) / (150 - 0)
+    for(var i = 0; i < 100; i++) {
+        var devX = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
+        var devY = ((Math.random()*20)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
+        var x = originX + devX;
+        var y = originY + devY;
+        var star = {
+            origin: { x: originX, y: originY },
+            curr: { x: x, y: y },
+            size: 2,
+            speed: 5,
+            slope: (x - originX) / (y - originY)
+        }
+        stars.push(star);
     }
-    stars.push(star);
 
 }
 
 function update() {
+
     for(var i = 0; i < stars.length; i++) {
         var star = stars[i];
-        var slope = star.slope;
-        var newX = star.curr.x + star.speed;
-        var newY = (slope * ( newX - star.start.x )) + star.start.y;
-        star.curr.x = newX;
-        star.curr.y = newY;
+        var tx = star.origin.x - star.curr.x;
+        var ty = star.origin.y - star.curr.y;
+        var dist = Math.sqrt(tx*tx+ty*ty);
+        var rad = Math.atan2(ty,tx);
+        var angle = rad / Math.PI * 180;
+        var deltaX = (tx / dist) * star.speed;
+        var deltaY = (ty / dist) * star.speed;
+        star.curr.x = star.curr.x - deltaX;
+        star.curr.y = star.curr.y - deltaY;
     }
+
 }
 
 function render() {
