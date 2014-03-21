@@ -30,6 +30,8 @@ function update() {
         star.curr.x = star.curr.x - deltaX;
         star.curr.y = star.curr.y - deltaY;
         star.speed = star.speed + Math.random();
+        star.origin.x = originX;
+        star.origin.y = originY;
     }
 
     addNewStars();
@@ -80,3 +82,11 @@ function addNewStars() {
 function cleanStars() {
 
 }
+
+$(window).resize(function() {
+    WIDTH = $(window).width();
+    HEIGHT = $(window).height();
+    game.renderer.resize(WIDTH, HEIGHT);
+    originX = WIDTH / 2;
+    originY = HEIGHT / 2;
+});
