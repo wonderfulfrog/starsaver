@@ -12,12 +12,11 @@ function create() {
 
     stars = [];
 
-    addNewStars();
-
 }
 
 function update() {
 
+    /* Update each star's position */
     for(var i = 0; i < stars.length; i++) {
         var star = stars[i];
         var tx = star.origin.x - star.curr.x;
@@ -41,6 +40,7 @@ function update() {
 
 function render() {
 
+    /* Render a star on screen */
     for(var i = 0; i < stars.length; i++) {
         var star = stars[i];
         game.context.fillStyle = 'rgba('+ star.color.red + ', ' + star.color.green + ', ' + star.color.blue + ', ' + star.brightness + ')';
@@ -49,7 +49,16 @@ function render() {
 
 }
 
+/**
+ * This function adds new stars to the master list
+ * of stars.
+ */
 function addNewStars() {
+    /*
+        Add some new stars
+        Each star begins at the originX/Y with some minor deviation
+        Brightness and color are randomized per star
+    */
     for(var i = 0; i < 1; i++) {
         var devX = ((Math.random()*50)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
         var devY = ((Math.random()*50)+1 ) * Math.cos( Math.PI * Math.round( Math.random() ));
@@ -79,10 +88,22 @@ function addNewStars() {
     }
 }
 
+/**
+ * This function removes stars that are off-screen
+ * from the master list of stars.
+ */
 function cleanStars() {
-
+    for(var i = 0; i < stars.length; i++) {
+        var star = stars[i];
+        if( (star.curr.x > WIDTH || star.curr.x < 0) && (star.curr.y > HEIGHT || star.curr.y < 0))
+            stars.splice(i, 1);
+    }
 }
 
+/**
+ * Resizes the canvas window to the size of the
+ * browser width/height
+ */
 $(window).resize(function() {
     WIDTH = $(window).width();
     HEIGHT = $(window).height();
