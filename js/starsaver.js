@@ -29,6 +29,7 @@ function update() {
         var deltaY = (ty / dist) * star.speed;
         star.curr.x = star.curr.x - deltaX;
         star.curr.y = star.curr.y - deltaY;
+        star.speed = star.speed + 0.7;
     }
 
     addNewStars();
