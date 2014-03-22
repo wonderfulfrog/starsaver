@@ -2,3 +2,22 @@ body {
     margin: 0;
     padding: 0;
 }
+
+#source-link {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+}
+
+#source-link a {
+    color: #999;
+    font-family: 'Arial', 'Verdana', sans-serif;
+    font-size: 11px;
+    opacity: 0.2;
+}
+
+#source-link a:hover {
+    opacity: 1.0;
+    transition: 0.1s;
+}
